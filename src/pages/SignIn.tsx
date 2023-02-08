@@ -1,8 +1,8 @@
 import React from "react";
-import { SignInView } from "@/features";
+import { SignInPageView } from "@/features";
 
 function SignIn() {
-  return <SignInView />;
+  return <SignInPageView />;
 }
 
 export default SignIn;

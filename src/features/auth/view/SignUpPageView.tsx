@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as styles from "./SignUpView.styles";
+import * as styles from "./SignUpPageView.styles";
 import { SignUpForm } from "@/features";
 
-function SignInView() {
+function SignInPageView() {
   return (
     <div css={styles.layout}>
       <div css={styles.signUpBox}>
@@ -18,4 +18,4 @@ function SignInView() {
   );
 }
 
-export default SignInView;
+export default SignInPageView;

@@ -9,11 +9,11 @@ export type SignInAlertMsg = {
   signInError: string | null;
 };
 
-export type SignInSuccessData = {
+export type SignInSuccessResponse = {
   access_token: string;
 };
 
-export type SignInFailureData = {
+export type SignInErrorResponse = {
   error: string;
   statusCode: number;
   message: string;

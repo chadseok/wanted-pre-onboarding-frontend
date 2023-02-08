@@ -9,7 +9,7 @@ export type SignUpAlertMsg = {
   signUpError: string | null;
 };
 
-export type SignInFailureData = {
+export type SignUpErrorResponse = {
   error: string;
   statusCode: number;
   message: string;

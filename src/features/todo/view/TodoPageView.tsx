@@ -1,8 +1,8 @@
 import React from "react";
-import * as styles from "./TodoView.styles";
+import * as styles from "./TodoPageView.styles";
 import { TodoForm, TodoList, useTodoList } from "@/features";
 
-function TodoView() {
+function TodoPageView() {
   const { todoList, refetch } = useTodoList();
 
   return (
@@ -16,4 +16,4 @@ function TodoView() {
   );
 }
 
-export default TodoView;
+export default TodoPageView;
