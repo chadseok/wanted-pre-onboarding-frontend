@@ -1,7 +1,8 @@
 import React from "react";
+import { SignUpView } from "@/features";
 
 function SignUp() {
-  return <div>SignUp</div>;
+  return <SignUpView />;
 }
 
 export default SignUp;
