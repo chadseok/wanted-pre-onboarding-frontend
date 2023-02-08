@@ -1,6 +1,6 @@
-const path = require("path");
+import path from "path";
 
-module.exports = {
+const config = {
   webpack: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -16,3 +16,5 @@ module.exports = {
     plugins: ["@emotion/babel-plugin"],
   },
 };
+
+export default config;
