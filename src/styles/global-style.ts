@@ -6,6 +6,8 @@ const globalStyle = css`
 
   button {
     cursor: pointer;
+    background-color: none;
+    border: none;
   }
 
   button:disabled {

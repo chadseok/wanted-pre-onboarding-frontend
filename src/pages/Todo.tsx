@@ -1,7 +1,8 @@
 import React from "react";
+import { TodoView } from "@/features";
 
 function Todo() {
-  return <div>Todo</div>;
+  return <TodoView />;
 }
 
 export default Todo;
