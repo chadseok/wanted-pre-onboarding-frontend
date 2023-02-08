@@ -1,7 +1,8 @@
 import React from "react";
+import { SignInView } from "@/features";
 
 function SignIn() {
-  return <div>SignIn</div>;
+  return <SignInView />;
 }
 
 export default SignIn;
