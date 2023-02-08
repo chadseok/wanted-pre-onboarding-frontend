@@ -1,7 +1,6 @@
 import React from "react";
 import axiosInstance from "@/services/axios";
 import type { TodoItemType } from "./TodoItem.types";
-import API_ENDPOINT from "@/utils/constants/api-endpoint";
 
 function useTodoList() {
   const [todoList, setTodoList] = React.useState<TodoItemType[]>([]);
@@ -9,7 +8,7 @@ function useTodoList() {
 
   React.useEffect(() => {
     async function getTodos() {
-      const res = await axiosInstance.get(API_ENDPOINT.getTodos);
+      const res = await axiosInstance.get("/todos");
       setTodoList(res.data.reverse());
     }
     getTodos();

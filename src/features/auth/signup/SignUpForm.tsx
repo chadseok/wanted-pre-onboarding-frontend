@@ -4,11 +4,10 @@ import * as styles from "./SignUpForm.styles";
 import type {
   SignUpUserInput,
   SignUpAlertMsg,
-  SignInFailureData,
+  SignUpErrorResponse,
 } from "./SignUpForm.types";
 import validator from "@/utils/helpers/validator";
 import ERROR_MSG from "@/utils/constants/error-msg";
-import API_ENDPOINT from "@/utils/constants/api-endpoint";
 import axiosInstance from "@/services/axios";
 import { AxiosError } from "axios";
 
@@ -28,10 +27,10 @@ function SignUpForm() {
     event.preventDefault();
 
     try {
-      await axiosInstance.post(API_ENDPOINT.signup, userInput);
+      await axiosInstance.post("/auth/signup", userInput);
       navigate("/signin");
     } catch (error) {
-      const err = error as AxiosError<SignInFailureData, SignUpUserInput>;
+      const err = error as AxiosError<SignUpErrorResponse>;
       setAlertMsg({
         ...alertMsg,
         signUpError: err.response ? err.response.data.message : null,

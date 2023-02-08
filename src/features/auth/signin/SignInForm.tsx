@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import type {
   SignInUserInput,
   SignInAlertMsg,
-  SignInSuccessData,
-  SignInFailureData,
+  SignInSuccessResponse,
+  SignInErrorResponse,
 } from "./SignInForm.types";
 import * as styles from "./SignInForm.styles";
 import validator from "@/utils/helpers/validator";
 import ERROR_MSG from "@/utils/constants/error-msg";
-import API_ENDPOINT from "@/utils/constants/api-endpoint";
 import STORAGE from "@/utils/constants/storage";
 import axiosInstance from "@/services/axios";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 
 function SignInForm() {
   const navigate = useNavigate();
@@ -30,12 +29,14 @@ function SignInForm() {
     event.preventDefault();
 
     try {
-      const res: AxiosResponse<SignInSuccessData, SignInUserInput> =
-        await axiosInstance.post(API_ENDPOINT.signin, userInput);
+      const res = await axiosInstance.post<SignInSuccessResponse>(
+        "/auth/signin",
+        userInput
+      );
       localStorage.setItem(STORAGE.authToken, res.data.access_token);
       navigate("/todo");
     } catch (error) {
-      const err = error as AxiosError<SignInFailureData, SignInUserInput>;
+      const err = error as AxiosError<SignInErrorResponse>;
       setAlertMsg({
         ...alertMsg,
         signInError: err.response ? err.response.data.message : null,
