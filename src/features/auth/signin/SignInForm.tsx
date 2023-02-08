@@ -105,7 +105,7 @@ function SignInForm() {
           <div css={styles.alertLine}>{alertMsg.passwordError}</div>
         </div>
         <button
-          data-testid="signup-button"
+          data-testid="signin-button"
           css={styles.submitBtn}
           type="submit"
           disabled={isBtnDisabled()}
