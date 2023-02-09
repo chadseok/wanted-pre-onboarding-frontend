@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as styles from "./SignUpForm.styles";
+import * as styles from "./form-styles";
 import type {
-  SignUpUserInput,
+  UserInput,
   SignUpAlertMsg,
-  SignUpErrorResponse,
-} from "./SignUpForm.types";
+  ServerErrorResponse,
+} from "./form-types";
 import validator from "@/utils/helpers/validator";
 import ERROR_MSG from "@/utils/constants/error-msg";
 import axiosInstance from "@/services/axios";
@@ -13,7 +13,7 @@ import { AxiosError } from "axios";
 
 function SignUpForm() {
   const navigate = useNavigate();
-  const [userInput, setUserInput] = React.useState<SignUpUserInput>({
+  const [userInput, setUserInput] = React.useState<UserInput>({
     email: "",
     password: "",
   });
@@ -30,7 +30,7 @@ function SignUpForm() {
       await axiosInstance.post("/auth/signup", userInput);
       navigate("/signin");
     } catch (error) {
-      const err = error as AxiosError<SignUpErrorResponse>;
+      const err = error as AxiosError<ServerErrorResponse>;
       setAlertMsg({
         ...alertMsg,
         signUpError: err.response ? err.response.data.message : null,

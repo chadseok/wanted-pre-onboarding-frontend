@@ -1,6 +1,6 @@
 import React from "react";
-import * as styles from "./TodoItem.styles";
-import type { TodoItemType } from "./TodoItem.types";
+import { itemStyles } from "./todo-styles";
+import type { TodoItemType } from "./todo-types";
 import axiosInstance from "@/services/axios";
 import { SlTrash } from "react-icons/sl";
 import { VscEdit } from "react-icons/vsc";
@@ -38,10 +38,14 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
   };
 
   return (
-    <li css={todoData.isCompleted ? styles.itemBoxChecked : styles.itemBox}>
+    <li
+      css={
+        todoData.isCompleted ? itemStyles.itemBoxChecked : itemStyles.itemBox
+      }
+    >
       <label htmlFor="todo">
         <input
-          css={styles.checkbox}
+          css={itemStyles.checkbox}
           name="todo"
           type="checkbox"
           onClick={handleChecked}
@@ -50,7 +54,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
         {editMode ? (
           <input
             data-testid="modify-input"
-            css={styles.editInput}
+            css={itemStyles.editInput}
             autoFocus
             value={newTodoText}
             onChange={(e) => {
@@ -58,11 +62,11 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
             }}
           />
         ) : (
-          <span css={styles.content}>{todoData.todo}</span>
+          <span css={itemStyles.content}>{todoData.todo}</span>
         )}
       </label>
       {editMode ? (
-        <div css={styles.btnBox}>
+        <div css={itemStyles.btnBox}>
           <button
             data-testid="cancel-button"
             onClick={() => {
@@ -77,7 +81,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
           </button>
         </div>
       ) : (
-        <div css={styles.btnBox}>
+        <div css={itemStyles.btnBox}>
           <button data-testid="modify-button" onClick={() => setEditMode(true)}>
             <VscEdit />
           </button>

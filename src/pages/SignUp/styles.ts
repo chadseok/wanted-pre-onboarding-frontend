@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import color from "@/styles/color";
 
-export const signUpBox = css`
+export const mainBox = css`
   background-color: white;
   width: 24rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -9,7 +9,7 @@ export const signUpBox = css`
   overflow: hidden;
 `;
 
-export const signUpHeadline = css`
+export const headline = css`
   font-size: 1.25rem;
   line-height: 1.75rem;
   color: white;
@@ -17,7 +17,7 @@ export const signUpHeadline = css`
   background-color: ${color.primary};
 `;
 
-export const signInLinkBox = css`
+export const linkBox = css`
   text-align: center;
   font-size: 0.75rem;
   line-height: 1rem;

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import type {
-  SignInUserInput,
+  UserInput,
   SignInAlertMsg,
   SignInSuccessResponse,
-  SignInErrorResponse,
-} from "./SignInForm.types";
-import * as styles from "./SignInForm.styles";
+  ServerErrorResponse,
+} from "./form-types";
+import * as styles from "./form-styles";
 import validator from "@/utils/helpers/validator";
 import ERROR_MSG from "@/utils/constants/error-msg";
 import STORAGE from "@/utils/constants/storage";
@@ -15,7 +15,7 @@ import { AxiosError } from "axios";
 
 function SignInForm() {
   const navigate = useNavigate();
-  const [userInput, setUserInput] = React.useState<SignInUserInput>({
+  const [userInput, setUserInput] = React.useState<UserInput>({
     email: "",
     password: "",
   });
@@ -36,7 +36,7 @@ function SignInForm() {
       localStorage.setItem(STORAGE.authToken, res.data.access_token);
       navigate("/todo");
     } catch (error) {
-      const err = error as AxiosError<SignInErrorResponse>;
+      const err = error as AxiosError<ServerErrorResponse>;
       setAlertMsg({
         ...alertMsg,
         signInError: err.response ? err.response.data.message : null,
@@ -85,6 +85,7 @@ function SignInForm() {
       <form css={styles.formBox} onSubmit={handleLogin}>
         <div css={styles.inputBox}>
           <input
+            id="email"
             data-testid="email-input"
             css={styles.input}
             type="email"
@@ -96,6 +97,7 @@ function SignInForm() {
         </div>
         <div css={styles.inputBox}>
           <input
+            id="password"
             data-testid="password-input"
             css={styles.input}
             type="password"

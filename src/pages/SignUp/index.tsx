@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as styles from "./SignUpPageView.styles";
+import * as styles from "./styles";
 import { SignUpForm } from "@/features";
 
-function SignInPageView() {
+function SignUp() {
   return (
     <div css={styles.layout}>
-      <div css={styles.signUpBox}>
-        <h1 css={styles.signUpHeadline}>회원가입</h1>
+      <div css={styles.mainBox}>
+        <h1 css={styles.headline}>회원가입</h1>
         <SignUpForm />
-        <div css={styles.signInLinkBox}>
+        <div css={styles.linkBox}>
           <span>이미 계정이 있나요?</span>
           <Link to="/signin">로그인</Link>
         </div>
@@ -18,4 +18,4 @@ function SignInPageView() {
   );
 }
 
-export default SignInPageView;
+export default SignUp;
