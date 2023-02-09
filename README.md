@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+## 원티드 프리온보딩 프론트엔드 인턴십 선발과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 선발과제 세부사항 :
 
-## Available Scripts
+https://github.com/walking-sunset/selection-task
 
-In the project directory, you can run:
+### 실행방법 :
 
-### `yarn start`
+1. `npm install` 또는 `yarn install` 입력
+2. 최상위 폴더에서 `.env` 파일 추가 후 `.env.template`의 양식대로 백엔드 api 엔드포인트 추가
+3. `npm start` 또는 `yarn start`로 프로젝트 시작
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 배포주소:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://wanted-pre-onboarding-frontend-ashy-one.vercel.app
 
-### `yarn test`
+### 사용스택:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 라우팅 : [![react-router-dom](https://img.shields.io/badge/react--router--dom-v6.8.1-orange)](https://www.npmjs.com/package/react-router-dom)
+- 스타일링 : [![@emotion/react](https://img.shields.io/badge/@emotion/react-v11.10.5-pink)](https://www.npmjs.com/package/@emotion/react)
+- http통신 : [![axios](https://img.shields.io/badge/axios-v1.3.2-blueviolet)](https://www.npmjs.com/package/axios)
+- CRA 설정 : [![@craco/craco](https://img.shields.io/badge/@craco/craco-v7.0.0-1AB190)](https://www.npmjs.com/package/@craco/craco)
+- 아이콘 라이브러리 : [![react-icons](https://img.shields.io/badge/react--icons-v4.7.1-red)](https://www.npmjs.com/package/react-icons)
 
-### `yarn build`
+### 프로젝트 폴더 구조:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src
+ ┣ constants
+ ┃ ┣ error-msg.ts
+ ┃ ┗ storage.ts
+ ┣ features
+ ┃ ┣ auth/
+ ┃ ┣ todo/
+ ┃ ┗ index.ts
+ ┣ helpers
+ ┃ ┗ validator.ts
+ ┣ pages
+ ┃ ┣ SignIn/
+ ┃ ┣ SignUp/
+ ┃ ┣ Todo/
+ ┃ ┗ index.tsx
+ ┣ services
+ ┃ ┗ axios.ts
+ ┣ styles
+ ┃ ┣ color.ts
+ ┃ ┣ global-style.ts
+ ┃ ┗ reset-css.ts
+ ┣ index.tsx
+ ┣ react-app-env.d.ts
+ ┗ reportWebVitals.ts
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- constants: 프로젝트 전체에서 사용하는 사용하는 상수를 모아두는 폴더
+- features: 프로젝트 주요 기능(인증, 투두)의 컴포넌트와 로직을 모아두는 폴더
+- helpers: 프로젝트 전체에서 사용하는 헬퍼 함수를 모아두는 폴더
+- pages: 라우트 역할을 하며, 각 페이지 별 로직(레이아웃 등, 리다이렉트)을 처리하는 경로
+- services: axios client를 정의
+- styles: 글로벌 스타일, 디자인 토큰 정의
