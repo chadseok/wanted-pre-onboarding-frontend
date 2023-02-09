@@ -6,7 +6,7 @@ const globalStyle = css`
 
   button {
     cursor: pointer;
-    background-color: none;
+    background-color: transparent;
     border: none;
   }
 

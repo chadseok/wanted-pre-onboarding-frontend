@@ -1,4 +1,5 @@
 const color = {
+  white: "rgb(255,255,255)",
   slate50: "rgb(248 250 252)",
   slate100: "rgb(241 245 249)",
   slate200: "rgb(226 232 240)",

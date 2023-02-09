@@ -49,7 +49,7 @@ const itemBox = css`
   padding: 0.5rem;
   margin-bottom: 0.25rem;
   border-radius: 0.25rem;
-  background-color: white;
+  background-color: ${color.white};
 
   :hover {
     background-color: ${color.slate50};
@@ -92,10 +92,6 @@ const editInput = css`
 const btnBox = css`
   button {
     vertical-align: -0.25rem;
-    color: ${color.slate500};
-    :hover {
-      color: black;
-    }
   }
 `;
 
