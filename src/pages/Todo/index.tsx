@@ -1,9 +1,13 @@
 import React from "react";
 import * as styles from "./styles";
 import { TodoForm, TodoList, useTodoList } from "@/features";
+import STORAGE from "@/constants/storage";
+import { Navigate } from "react-router-dom";
 
 function Todo() {
   const { todoList, refetch } = useTodoList();
+  const token = localStorage.getItem(STORAGE.authToken);
+  if (!token) return <Navigate replace to="/signin" />;
 
   return (
     <div css={styles.layout}>
