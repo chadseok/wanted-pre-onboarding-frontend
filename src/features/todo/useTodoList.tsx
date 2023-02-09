@@ -1,6 +1,6 @@
 import React from "react";
 import axiosInstance from "@/services/axios";
-import type { TodoItemType } from "./TodoItem.types";
+import type { TodoItemType } from "./todo-types";
 
 function useTodoList() {
   const [todoList, setTodoList] = React.useState<TodoItemType[]>([]);
