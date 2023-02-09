@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import color from "@/styles/color";
 
 export const signInBox = css`
   background-color: white;
@@ -13,7 +14,7 @@ export const signInHeadline = css`
   line-height: 1.75rem;
   color: white;
   padding: 1rem;
-  background-color: #252839;
+  background-color: ${color.primary};
 `;
 
 export const signupLinkBox = css`
@@ -25,9 +26,8 @@ export const signupLinkBox = css`
 
 export const layout = css`
   display: flex;
-  background-color: rgb(248 250 252);
+  background-color: ${color.slate50};
   justify-content: center;
   align-items: center;
-  height: max-content;
   height: 100vh;
 `;

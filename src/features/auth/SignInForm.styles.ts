@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import color from "@/styles/color";
 
 export const formBox = css`
   display: flex;
@@ -18,12 +19,12 @@ export const label = css`
 export const input = css`
   width: 100%;
   padding: 1rem 0.5rem;
-  border: 1px solid #eaeaea;
+  border: 1px solid ${color.slate200};
   height: 3rem;
 `;
 
 export const alertLine = css`
-  color: rgb(234 179 8);
+  color: ${color.caution};
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
@@ -31,18 +32,17 @@ export const alertLine = css`
 `;
 
 export const alertBox = css`
-  border: 1px solid rgb(251 113 133);
-  background-color: rgb(244 63 94);
+  background-color: ${color.warning};
   padding: 0.75rem 1rem;
   font-weight: bold;
-  font-size: 0.75rem; /* 12px */
-  line-height: 1rem; /* 16px */
+  font-size: 0.75rem;
+  line-height: 1rem;
   color: white;
 `;
 
 export const submitBtn = css`
   height: 2.5rem;
-  background-color: #252839;
+  background-color: ${color.primary};
   border-radius: 0.5rem;
   color: white;
 

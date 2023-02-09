@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import color from "@/styles/color";
 
 export const itemBox = css`
   position: relative;
@@ -10,16 +11,16 @@ export const itemBox = css`
   background-color: white;
 
   :hover {
-    background-color: rgb(248 250 252);
+    background-color: ${color.slate50};
   }
 `;
 
 export const itemBoxChecked = css`
   ${itemBox}
-  background-color: rgb(248 250 252);
+  background-color: ${color.slate50};
   span {
     text-decoration: line-through;
-    color: rgb(203 213 225);
+    color: ${color.slate300};
   }
 `;
 
@@ -50,7 +51,7 @@ export const editInput = css`
 export const btnBox = css`
   button {
     vertical-align: -0.25rem;
-    color: rgb(100 116 139);
+    color: ${color.slate500};
     :hover {
       color: black;
     }

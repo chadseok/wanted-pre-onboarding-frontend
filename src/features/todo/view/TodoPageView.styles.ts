@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
+import color from "@/styles/color";
 
 export const layout = css`
   display: flex;
-  background-color: rgb(248 250 252);
+  background-color: ${color.slate50};
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -13,7 +14,7 @@ export const contentBox = css`
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   border-radius: 0.375rem;
   overflow: hidden;
-  background-color: rgb(241 245 249);
+  background-color: ${color.slate100};
 `;
 
 export const headline = css`
@@ -21,5 +22,5 @@ export const headline = css`
   line-height: 1.75rem;
   color: white;
   padding: 1rem;
-  background-color: #252839;
+  background-color: ${color.primary};
 `;
