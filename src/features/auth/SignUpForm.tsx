@@ -6,8 +6,8 @@ import type {
   SignUpAlertMsg,
   ServerErrorResponse,
 } from "./form-types";
-import validator from "@/utils/helpers/validator";
-import ERROR_MSG from "@/utils/constants/error-msg";
+import validator from "@/helpers/validator";
+import ERROR_MSG from "@/constants/error-msg";
 import axiosInstance from "@/services/axios";
 import { AxiosError } from "axios";
 

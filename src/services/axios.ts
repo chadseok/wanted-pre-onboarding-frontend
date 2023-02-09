@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
-import STORAGE from "@/utils/constants/storage";
+import STORAGE from "@/constants/storage";
 
 const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 

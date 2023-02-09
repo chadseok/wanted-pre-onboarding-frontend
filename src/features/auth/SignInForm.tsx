@@ -7,9 +7,9 @@ import type {
   ServerErrorResponse,
 } from "./form-types";
 import * as styles from "./form-styles";
-import validator from "@/utils/helpers/validator";
-import ERROR_MSG from "@/utils/constants/error-msg";
-import STORAGE from "@/utils/constants/storage";
+import validator from "@/helpers/validator";
+import ERROR_MSG from "@/constants/error-msg";
+import STORAGE from "@/constants/storage";
 import axiosInstance from "@/services/axios";
 import { AxiosError } from "axios";
 
