@@ -24,7 +24,7 @@ function SignInForm() {
     signInError: null,
   });
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
@@ -78,7 +78,7 @@ function SignInForm() {
       {alertMsg.signInError && (
         <div css={styles.alertBox}>{alertMsg.signInError}</div>
       )}
-      <form css={styles.formBox} onSubmit={handleLogin}>
+      <form css={styles.formBox} onSubmit={handleSignIn}>
         <div css={styles.inputBox}>
           <input
             id="email"

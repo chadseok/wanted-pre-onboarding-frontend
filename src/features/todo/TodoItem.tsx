@@ -10,7 +10,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
   const [newTodoText, setNewTodoText] = React.useState<string>(props.data.todo);
   const [editMode, setEditMode] = React.useState<boolean>(false);
 
-  const handleChecked = async () => {
+  const toggleCheckBox = async () => {
     const res = await updateTodoApi({
       ...todoData,
       isCompleted: !todoData.isCompleted,
@@ -19,14 +19,22 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
     setTodoData(res.data);
   };
 
-  const handleEditTodo = async () => {
-    const res = await updateTodoApi({ ...todoData, todo: newTodoText });
+  const enterEditMode = () => {
+    setEditMode(true);
+  };
 
-    setTodoData(res.data);
+  const editTodoText = (nextStep: "submit" | "cancel") => async () => {
+    if (nextStep === "cancel") {
+      setNewTodoText(todoData.todo);
+    } else {
+      const res = await updateTodoApi({ ...todoData, todo: newTodoText });
+      setTodoData(res.data);
+    }
+
     setEditMode(false);
   };
 
-  const handleDeleteTodo = async () => {
+  const deleteTodo = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
       await deleteTodoApi(todoData.id);
     }
@@ -45,7 +53,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
           css={itemStyles.checkbox}
           name="todo"
           type="checkbox"
-          onClick={handleChecked}
+          onClick={toggleCheckBox}
           defaultChecked={todoData.isCompleted}
         />
         {editMode ? (
@@ -64,25 +72,19 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
       </label>
       {editMode ? (
         <div css={itemStyles.btnBox}>
-          <button
-            data-testid="cancel-button"
-            onClick={() => {
-              setEditMode(false);
-              setNewTodoText(todoData.todo);
-            }}
-          >
+          <button data-testid="cancel-button" onClick={editTodoText("cancel")}>
             취소
           </button>
-          <button data-testid="submit-button" onClick={handleEditTodo}>
+          <button data-testid="submit-button" onClick={editTodoText("submit")}>
             수정
           </button>
         </div>
       ) : (
         <div css={itemStyles.btnBox}>
-          <button data-testid="modify-button" onClick={() => setEditMode(true)}>
+          <button data-testid="modify-button" onClick={enterEditMode}>
             <VscEdit />
           </button>
-          <button data-testid="delete-button" onClick={handleDeleteTodo}>
+          <button data-testid="delete-button" onClick={deleteTodo}>
             <SlTrash />
           </button>
         </div>
