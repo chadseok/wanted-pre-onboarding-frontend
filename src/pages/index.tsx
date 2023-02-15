@@ -1,20 +1,27 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Todo from "./Todo";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+
+const router = createBrowserRouter([
+  {
+    element: <PrivateRoute />,
+    children: [{ element: <Todo />, path: "todo" }],
+  },
+  {
+    element: <PublicRoute restricted />,
+    children: [
+      { element: <SignIn />, path: "signin" },
+      { element: <SignUp />, path: "signup" },
+    ],
+  },
+]);
 
 function PageRouter() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/todo" />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default PageRouter;

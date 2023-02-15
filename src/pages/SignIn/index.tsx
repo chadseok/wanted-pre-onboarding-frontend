@@ -1,13 +1,9 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as styles from "./styles";
 import { SignInForm } from "@/features";
-import STORAGE from "@/constants/storage";
 
 function SignIn() {
-  const token = localStorage.getItem(STORAGE.authToken);
-  if (token) return <Navigate replace to="/todo" />;
-
   return (
     <div css={styles.layout}>
       <div css={styles.mainBox}>
