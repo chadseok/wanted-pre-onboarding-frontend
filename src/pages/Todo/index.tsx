@@ -1,23 +1,16 @@
 import React from "react";
-import * as styles from "./styles";
-import { TodoForm, TodoList, useTodoList } from "@/features";
-import STORAGE from "@/constants/storage";
-import { Navigate } from "react-router-dom";
+import Todo from "./components";
 
-function Todo() {
-  const { todoList, refetch } = useTodoList();
-  const token = localStorage.getItem(STORAGE.authToken);
-  if (!token) return <Navigate replace to="/signin" />;
-
+function TodoLayout() {
   return (
-    <div css={styles.layout}>
-      <div css={styles.contentBox}>
-        <h1 css={styles.headline}>투두</h1>
-        <TodoForm refetch={refetch} />
-        <TodoList todoList={todoList} refetch={refetch} />
-      </div>
-    </div>
+    <Todo>
+      <Todo.Headline />
+      <Todo.ContextProvider>
+        <Todo.Form />
+        <Todo.List />
+      </Todo.ContextProvider>
+    </Todo>
   );
 }
 
-export default Todo;
+export default TodoLayout;

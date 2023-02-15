@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import type {
   UserInput,
   SignInAlertMsg,
-  SignInSuccessResponse,
   ServerErrorResponse,
 } from "./form-types";
 import * as styles from "./form-styles";
 import validator from "@/helpers/validator";
 import ERROR_MSG from "@/constants/error-msg";
 import STORAGE from "@/constants/storage";
-import axiosInstance from "@/services/axios";
+import { signInApi } from "./auth-api";
 import { AxiosError } from "axios";
 
 function SignInForm() {
@@ -25,14 +24,11 @@ function SignInForm() {
     signInError: null,
   });
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const res = await axiosInstance.post<SignInSuccessResponse>(
-        "/auth/signin",
-        userInput
-      );
+      const res = await signInApi(userInput);
       localStorage.setItem(STORAGE.authToken, res.data.access_token);
       navigate("/todo");
     } catch (error) {
@@ -82,7 +78,7 @@ function SignInForm() {
       {alertMsg.signInError && (
         <div css={styles.alertBox}>{alertMsg.signInError}</div>
       )}
-      <form css={styles.formBox} onSubmit={handleLogin}>
+      <form css={styles.formBox} onSubmit={handleSignIn}>
         <div css={styles.inputBox}>
           <input
             id="email"

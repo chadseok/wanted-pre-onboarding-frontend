@@ -1,17 +1,19 @@
 import React from "react";
-import { formStyles } from "./todo-styles";
 import { BsPencilFill } from "react-icons/bs";
-import axiosInstance from "@/services/axios";
+import { formStyles } from "./todo-styles";
+import { createTodoApi } from "./todo-api";
+import { TodoContext } from "./TodoContextProvider";
 
-function TodoForm(props: { refetch: () => void }) {
+function TodoForm() {
+  const { todoList, setTodoList } = React.useContext(TodoContext);
   const [todoText, setTodoText] = React.useState<string>("");
 
   const createTodo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await axiosInstance.post("/todos", { todo: todoText });
+    const res = await createTodoApi(todoText);
     setTodoText("");
-    props.refetch();
+    setTodoList([res.data, ...todoList]);
   };
 
   return (

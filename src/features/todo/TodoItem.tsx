@@ -1,40 +1,47 @@
 import React from "react";
 import { itemStyles } from "./todo-styles";
 import type { TodoItemType } from "./todo-types";
-import axiosInstance from "@/services/axios";
+import { updateTodoApi, deleteTodoApi } from "./todo-api";
 import { SlTrash } from "react-icons/sl";
 import { VscEdit } from "react-icons/vsc";
+import { TodoContext } from "./TodoContextProvider";
 
-function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
+function TodoItem(props: { data: TodoItemType }) {
+  const { todoList, setTodoList } = React.useContext(TodoContext);
   const [todoData, setTodoData] = React.useState<TodoItemType>(props.data);
   const [newTodoText, setNewTodoText] = React.useState<string>(props.data.todo);
   const [editMode, setEditMode] = React.useState<boolean>(false);
 
-  const handleChecked = async () => {
-    const res = await axiosInstance.put(`/todos/${todoData.id}`, {
-      todo: todoData.todo,
+  const toggleCheckBox = async () => {
+    const res = await updateTodoApi({
+      ...todoData,
       isCompleted: !todoData.isCompleted,
     });
 
     setTodoData(res.data);
   };
 
-  const handleEditTodo = async () => {
-    const res = await axiosInstance.put(`/todos/${todoData.id}`, {
-      todo: newTodoText,
-      isCompleted: todoData.isCompleted,
-    });
+  const enterEditMode = () => {
+    setEditMode(true);
+  };
 
-    setTodoData(res.data);
+  const editTodoText = (nextStep: "submit" | "cancel") => async () => {
+    if (nextStep === "cancel") {
+      setNewTodoText(todoData.todo);
+    } else {
+      const res = await updateTodoApi({ ...todoData, todo: newTodoText });
+      setTodoData(res.data);
+    }
+
     setEditMode(false);
   };
 
-  const handleDeleteTodo = async () => {
+  const deleteTodo = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      await axiosInstance.delete(`/todos/${todoData.id}`);
+      await deleteTodoApi(todoData.id);
     }
 
-    props.refetch();
+    setTodoList(todoList.filter((todo) => todo.id !== todoData.id));
   };
 
   return (
@@ -48,7 +55,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
           css={itemStyles.checkbox}
           name="todo"
           type="checkbox"
-          onClick={handleChecked}
+          onClick={toggleCheckBox}
           defaultChecked={todoData.isCompleted}
         />
         {editMode ? (
@@ -67,25 +74,19 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
       </label>
       {editMode ? (
         <div css={itemStyles.btnBox}>
-          <button
-            data-testid="cancel-button"
-            onClick={() => {
-              setEditMode(false);
-              setNewTodoText(todoData.todo);
-            }}
-          >
+          <button data-testid="cancel-button" onClick={editTodoText("cancel")}>
             취소
           </button>
-          <button data-testid="submit-button" onClick={handleEditTodo}>
+          <button data-testid="submit-button" onClick={editTodoText("submit")}>
             수정
           </button>
         </div>
       ) : (
         <div css={itemStyles.btnBox}>
-          <button data-testid="modify-button" onClick={() => setEditMode(true)}>
+          <button data-testid="modify-button" onClick={enterEditMode}>
             <VscEdit />
           </button>
-          <button data-testid="delete-button" onClick={handleDeleteTodo}>
+          <button data-testid="delete-button" onClick={deleteTodo}>
             <SlTrash />
           </button>
         </div>
