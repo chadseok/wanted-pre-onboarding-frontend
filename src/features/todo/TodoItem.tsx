@@ -4,8 +4,10 @@ import type { TodoItemType } from "./todo-types";
 import { updateTodoApi, deleteTodoApi } from "./todo-api";
 import { SlTrash } from "react-icons/sl";
 import { VscEdit } from "react-icons/vsc";
+import { TodoContext } from "./TodoContextProvider";
 
-function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
+function TodoItem(props: { data: TodoItemType }) {
+  const { todoList, setTodoList } = React.useContext(TodoContext);
   const [todoData, setTodoData] = React.useState<TodoItemType>(props.data);
   const [newTodoText, setNewTodoText] = React.useState<string>(props.data.todo);
   const [editMode, setEditMode] = React.useState<boolean>(false);
@@ -39,7 +41,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
       await deleteTodoApi(todoData.id);
     }
 
-    props.refetch();
+    setTodoList(todoList.filter((todo) => todo.id !== todoData.id));
   };
 
   return (

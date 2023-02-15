@@ -1,13 +1,15 @@
 import React from "react";
 import { listStyles } from "./todo-styles";
 import TodoItem from "./TodoItem";
-import type { TodoItemType } from "./todo-types";
+import { TodoContext } from "./TodoContextProvider";
 
-function TodoList(props: { todoList: TodoItemType[]; refetch: () => void }) {
+function TodoList() {
+  const { todoList } = React.useContext(TodoContext);
+
   return (
     <ul css={listStyles.listBox}>
-      {props.todoList.map((todo) => (
-        <TodoItem key={todo.id} data={todo} refetch={props.refetch} />
+      {todoList.map((todo) => (
+        <TodoItem key={todo.id} data={todo} />
       ))}
     </ul>
   );
