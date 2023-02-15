@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import type {
   UserInput,
   SignInAlertMsg,
-  SignInSuccessResponse,
   ServerErrorResponse,
 } from "./form-types";
 import * as styles from "./form-styles";
 import validator from "@/helpers/validator";
 import ERROR_MSG from "@/constants/error-msg";
 import STORAGE from "@/constants/storage";
-import axiosInstance from "@/services/axios";
+import { signInApi } from "./auth-api";
 import { AxiosError } from "axios";
 
 function SignInForm() {
@@ -29,10 +28,7 @@ function SignInForm() {
     event.preventDefault();
 
     try {
-      const res = await axiosInstance.post<SignInSuccessResponse>(
-        "/auth/signin",
-        userInput
-      );
+      const res = await signInApi(userInput);
       localStorage.setItem(STORAGE.authToken, res.data.access_token);
       navigate("/todo");
     } catch (error) {

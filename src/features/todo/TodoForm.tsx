@@ -1,7 +1,7 @@
 import React from "react";
-import { formStyles } from "./todo-styles";
 import { BsPencilFill } from "react-icons/bs";
-import axiosInstance from "@/services/axios";
+import { formStyles } from "./todo-styles";
+import { createTodoApi } from "./todo-api";
 
 function TodoForm(props: { refetch: () => void }) {
   const [todoText, setTodoText] = React.useState<string>("");
@@ -9,7 +9,7 @@ function TodoForm(props: { refetch: () => void }) {
   const createTodo = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await axiosInstance.post("/todos", { todo: todoText });
+    await createTodoApi(todoText);
     setTodoText("");
     props.refetch();
   };

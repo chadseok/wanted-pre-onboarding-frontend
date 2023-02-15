@@ -1,5 +1,5 @@
 import React from "react";
-import axiosInstance from "@/services/axios";
+import { getTodosApi } from "./todo-api";
 import type { TodoItemType } from "./todo-types";
 
 function useTodoList() {
@@ -8,7 +8,7 @@ function useTodoList() {
 
   React.useEffect(() => {
     async function getTodos() {
-      const res = await axiosInstance.get("/todos");
+      const res = await getTodosApi();
       setTodoList(res.data.reverse());
     }
     getTodos();

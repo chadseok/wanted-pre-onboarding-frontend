@@ -8,7 +8,7 @@ import type {
 } from "./form-types";
 import validator from "@/helpers/validator";
 import ERROR_MSG from "@/constants/error-msg";
-import axiosInstance from "@/services/axios";
+import { signUpApi } from "./auth-api";
 import { AxiosError } from "axios";
 
 function SignUpForm() {
@@ -27,7 +27,7 @@ function SignUpForm() {
     event.preventDefault();
 
     try {
-      await axiosInstance.post("/auth/signup", userInput);
+      await signUpApi(userInput);
       navigate("/signin");
     } catch (error) {
       const err = error as AxiosError<ServerErrorResponse>;

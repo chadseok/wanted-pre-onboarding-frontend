@@ -1,7 +1,7 @@
 import React from "react";
 import { itemStyles } from "./todo-styles";
 import type { TodoItemType } from "./todo-types";
-import axiosInstance from "@/services/axios";
+import { updateTodoApi, deleteTodoApi } from "./todo-api";
 import { SlTrash } from "react-icons/sl";
 import { VscEdit } from "react-icons/vsc";
 
@@ -11,8 +11,8 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
   const [editMode, setEditMode] = React.useState<boolean>(false);
 
   const handleChecked = async () => {
-    const res = await axiosInstance.put(`/todos/${todoData.id}`, {
-      todo: todoData.todo,
+    const res = await updateTodoApi({
+      ...todoData,
       isCompleted: !todoData.isCompleted,
     });
 
@@ -20,10 +20,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
   };
 
   const handleEditTodo = async () => {
-    const res = await axiosInstance.put(`/todos/${todoData.id}`, {
-      todo: newTodoText,
-      isCompleted: todoData.isCompleted,
-    });
+    const res = await updateTodoApi({ ...todoData, todo: newTodoText });
 
     setTodoData(res.data);
     setEditMode(false);
@@ -31,7 +28,7 @@ function TodoItem(props: { data: TodoItemType; refetch: () => void }) {
 
   const handleDeleteTodo = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      await axiosInstance.delete(`/todos/${todoData.id}`);
+      await deleteTodoApi(todoData.id);
     }
 
     props.refetch();
